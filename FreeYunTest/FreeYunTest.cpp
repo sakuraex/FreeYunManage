@@ -31,6 +31,10 @@ int main()
 
     if (std::get<0>(info))
     {
+		ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+
+
+
 		info = yun.CloudLogin("121231", "33", "md5");
 
         if (std::get<0>(info))
