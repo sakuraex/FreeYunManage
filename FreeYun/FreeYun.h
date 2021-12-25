@@ -205,14 +205,6 @@ public:
 
 
 
-
-
-
-
-
-
-
-
 	//取错误码
 	int GetErrorCode();
 	//取错误信息
