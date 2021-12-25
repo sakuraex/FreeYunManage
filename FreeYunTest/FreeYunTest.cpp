@@ -16,7 +16,7 @@ int main()
 
 
 
-   //auto util = std::make_unique<CACEUtil>();
+    auto util = std::make_unique<CACEUtil>();
 
 
 
@@ -27,16 +27,235 @@ int main()
    //ACEWarningLog("{0}", client.GetHttpHeader().c_str());
     FreeYun yun;
 
-    for (size_t i = 0; i < 1024; i++)
+    auto info = yun.CloudInit(&TAG_ANTI_FREEYUN_INIT_INFO("1168", "27A5172AFA54D2F4A202EA76B4B43612", "COxlsBLt", "KzEWarV4N8", "9303", "122", 0));
+
+    if (std::get<0>(info))
     {
-        yun.CloudInit(&TAG_ANTI_FREEYUN_INIT_INFO("1168", "27A5172AFA54D2F4A202EA76B4B43612", "COxlsBLt", "KzEWarV4N8", "9303", "22", 1));
-        Sleep(1000 * 5);
+		info = yun.CloudLogin("121231", "33", "md5");
+
+        if (std::get<0>(info))
+        {
+            ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+        }
+        else
+        {
+            ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+        }
+       info = yun.CloudPay("121231", "01A90480F419FA6AC474AD03D837E5AB");
+
+		if (std::get<0>(info))
+		{
+            ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+        else
+        {
+            ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+        }
+
+		info = yun.CloudQueryUserInfo("121231");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));		
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
 
 
+  //      info = yun.CloudBlackLst("121231");
+
+		//if (std::get<0>(info))
+		//{
+		//	ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		//}
+		//else
+		//{
+		//	ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		//}
+		info = yun.CloudChangePassword("121231","33","33");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		//info = yun.CloudExit("121231");
+
+		//if (std::get<0>(info))
+		//{
+		//	ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		//}
+		//else
+		//{
+		//	ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		//}
+		
+		info = yun.CloudGetVersionInfo();
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+		
+		info = yun.CloudGetPayCardList();
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		info = yun.CloudGetUserStatus("121231");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		info = yun.CloudUserSubPoint("121231",100);
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+
+		info = yun.CloudCardLogin("0114F37E0AFA5CE9E2F9A48A8BE5682E", "md5");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		info = yun.CloudExecTelnetCode("0114F37E0AFA5CE9E2F9A48A8BE5682E", "test","myFunction","1=15,1=10");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		info = yun.CloudGetTeletVar("0114F37E0AFA5CE9E2F9A48A8BE5682E", "Cstrike_Check_1");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+		info = yun.CloudHeartBeat("0114F37E0AFA5CE9E2F9A48A8BE5682E");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		info = yun.CloudChangeMachine("0114F37E0AFA5CE9E2F9A48A8BE5682E");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+		/*info = yun.CloudFeedback(u8"留言反馈","2222@qq.com");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}*/
+		
+		//info = yun.CloudUpLoadClientExceptionInfo(u8"异常标签",u8"一场内容", u8"win7");
+
+		//if (std::get<0>(info))
+		//{
+		//	ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		//}
+		//else
+		//{
+		//	ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		//}
+
+		info = yun.CloudGetUserPermission(u8"0114F37E0AFA5CE9E2F9A48A8BE5682E");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+		
+		info = yun.CloudUsersOnlineCount();
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		info = yun.CloudUserUnBind("0114F37E0AFA5CE9E2F9A48A8BE5682E");
+
+		if (std::get<0>(info))
+		{
+			ACEInfoLog("{}", util->UTF8_To_string(std::get<2>(info).dump()));
+		}
+		else
+		{
+			ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+		}
+
+		
+        getchar();
     }
+    ACEInfoLog("{} errorCode:{}  {}", std::get<0>(info), yun.GetErrorCode(), util->UTF8_To_string(std::get<1>(info)));
+   
 
  
-
 
 
     //ciphertext
