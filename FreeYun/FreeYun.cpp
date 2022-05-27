@@ -5,6 +5,20 @@
 #include "openssl/md5.h"
 
 
+FreeYun::FreeYun()
+{
+	m_pInstance = this;
+}
+
+FreeYun* FreeYun::GetpInstance()
+{
+	if (m_pInstance  == nullptr)
+	{
+		m_pInstance = new FreeYun();
+	}
+	return m_pInstance;
+}
+
 std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudInit(PTAG_ANTI_FREEYUN_INIT_INFO pInfo)
 {
 	VMProtectBegin(__FUNCTION__);
@@ -769,6 +783,13 @@ std::string FreeYun::Post(std::string str)
 		if (strResponse.empty())
 		{
 			m_HttpClient.Posts(xorstr_("https://bgp.freeyun.net/webgateway.html"), str, strResponse);
+
+			if(!strResponse.empty())
+			{
+				// 如果第一条线路崩溃.BGP线路可行.将自动切换第二条线路
+				m_ServerLine = 1;
+			}
+
 		}
 	}		
 	break;

@@ -22,6 +22,9 @@ public:
 	std::string GetErrorStr(CURLcode ErrorCode);
 	//@返回Http头部信息
 	std::string GetHttpHeader();
+
+
+
 private:
 	static size_t OnWriteData(void* buffer, size_t size, size_t nmemb, void* lpVoid);
 	std::string m_Header;

@@ -11,8 +11,8 @@ int main()
 {
     HttpClient client;
 
-   //std::string r;
-   //auto Code =  client.Get("http://www.freeyun.net/auther/index.html",r);
+  std::string r;
+  auto Code =  client.Get("http://www.freeyun.net/auther/index.html",r);
 
 
 

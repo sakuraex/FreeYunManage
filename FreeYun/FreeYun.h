@@ -71,6 +71,9 @@ typedef struct ANTI_FREEYUN_REG
 class FreeYun
 {
 public:
+	FreeYun();
+	static FreeYun* GetpInstance();
+
 	// @ 初始化,请求可获取到软件的初始化信息，如软件公告、软件版本号、是否有更新等信息
 	std::tuple<bool,std::string, nlohmann::json> CloudInit(PTAG_ANTI_FREEYUN_INIT_INFO pInfo);
 
@@ -242,5 +245,6 @@ private:
 	using my_workaround_fifo_map = nlohmann::fifo_map<K, V, nlohmann::fifo_map_compare<K>, A>;
 	using FreeYun_json = nlohmann::basic_json<my_workaround_fifo_map>;
 
+	static inline FreeYun* m_pInstance = nullptr;
 };
 
