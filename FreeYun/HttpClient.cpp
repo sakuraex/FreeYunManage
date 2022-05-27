@@ -28,6 +28,21 @@ CURLcode HttpClient::Post(const std::string& strUrl, const std::string& strPost,
 	curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);
 	curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 8);//连接超时，这个数值如果设置太短可能导致数据请求不到就断开了
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);//接收数据时超时设置，如果10秒内数据未接收完，直接退出
+
+
+	if (m_IpPort.empty() == false)
+	{
+		curl_easy_setopt(curl, CURLOPT_PROXY, m_IpPort.data());
+		curl_easy_setopt(curl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+		//curl_easy_setopt(curl, CURLOPT_HTTPPROXYTUNNEL, 1L);
+		if (m_User.empty() == false)
+		{
+			curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, m_User.data());
+		}
+	}
+
+
+
 	res = curl_easy_perform(curl);
 
 	curl_easy_cleanup(curl);
@@ -64,6 +79,16 @@ CURLcode HttpClient::Posts(const std::string& strUrl, const std::string& strPost
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, true);
 		curl_easy_setopt(curl, CURLOPT_CAINFO, pCaPath);
 	}
+	if (m_IpPort.empty() == false)
+	{
+		curl_easy_setopt(curl, CURLOPT_PROXY, m_IpPort.data());
+		curl_easy_setopt(curl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+		curl_easy_setopt(curl, CURLOPT_HTTPPROXYTUNNEL, 1L);
+		if (m_User.empty() == false)
+		{
+			curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, m_User.data());
+		}
+	}
 	curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 8);//连接超时，这个数值如果设置太短可能导致数据请求不到就断开了
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);//接收数据时超时设置，如果10秒内数据未接收完，直接退出
 	res = curl_easy_perform(curl);
@@ -98,6 +123,20 @@ CURLcode HttpClient::Get(const std::string& strUrl, std::string& strResponse)
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);//接收数据时超时设置，如果10秒内数据未接收完，直接退出
 
 
+	if (m_IpPort.empty() == false)
+	{
+		curl_easy_setopt(curl, CURLOPT_PROXY, m_IpPort.data());
+		curl_easy_setopt(curl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+
+		if (m_User.empty() == false)
+		{
+			curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, m_User.data());
+		}
+	}
+
+
+
+
 
 	res        = curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
@@ -130,6 +169,20 @@ CURLcode HttpClient::Gets(const std::string& strUrl, std::string& strResponse, c
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, true);
 		curl_easy_setopt(curl, CURLOPT_CAINFO, pCaPath);
 	}
+
+	if (m_IpPort.empty() == false)
+	{
+		curl_easy_setopt(curl, CURLOPT_PROXY, m_IpPort.data());
+		curl_easy_setopt(curl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+
+		if (m_User.empty() == false)
+		{
+			curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, m_User.data());
+		}
+	}
+
+
+
 	curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 8);//连接超时，这个数值如果设置太短可能导致数据请求不到就断开了
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);//接收数据时超时设置，如果10秒内数据未接收完，直接退出
 	res = curl_easy_perform(curl);
@@ -145,6 +198,16 @@ std::string HttpClient::GetErrorStr(CURLcode ErrorCode)
 std::string HttpClient::GetHttpHeader()
 {
 	return m_Header;
+}
+
+void HttpClient::SetProxy(std::string ip, std::string Port, std::string user, std::string password)
+{
+	m_IpPort = ip + ":" + Port;
+
+	if (user.empty()== false && password.empty() == false)
+	{
+		m_User = user + ":" + password;
+	}
 }
 
 size_t HttpClient::OnWriteData(void* buffer, size_t size, size_t nmemb, void* lpVoid)

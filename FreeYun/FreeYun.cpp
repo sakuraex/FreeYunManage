@@ -31,6 +31,11 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudInit(PTAG_ANTI_FREEY
 	m_MachineID  = pInfo->MachineID;
 	m_ServerLine = pInfo->ServerLine;
 
+	if (pInfo->Proxy.IP.empty() == false)
+	{
+		m_HttpClient.SetProxy(pInfo->Proxy.IP, pInfo->Proxy.Port, pInfo->Proxy.User, pInfo->Proxy.PassWord);
+	}
+
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false,"","");
 
 	auto util = std::make_unique<CACEUtil>();

@@ -5,18 +5,31 @@
 #include <nlohmann/json.hpp>
 #include <nlohmann/fifo_map.hpp>
 
+
+//线路代理
+typedef struct ANTI_FREEYUN_PROXY
+{
+	std::string IP;
+	std::string Port;
+	std::string User;
+	std::string PassWord;
+}TAG_ANTI_FREEYUN_PROXY, * PTAG_ANTI_FREEYUN_PROXY;
+
+
+
 //*	传入的初始化信息
 typedef struct ANTI_FREEYUN_INIT_INFO
 {
-	std::string Version;	    //当前版本号
-	std::string SecretKey;	    //软件密钥
-	std::string Rc4Key;		    //Rc4密钥
-	std::string SaltKey;	    //签名盐
-	std::string AppId;		    //软件ID
-	std::string MachineID;		//机器码
-	int   ServerLine;	        //服务器线路
+	std::string Version;			//当前版本号
+	std::string SecretKey;			//软件密钥
+	std::string Rc4Key;				//Rc4密钥
+	std::string SaltKey;			//签名盐
+	std::string AppId;				//软件ID
+	std::string MachineID;			//机器码
+	int   ServerLine;				//服务器线路
+	TAG_ANTI_FREEYUN_PROXY	Proxy;	//代理线路
 
-	ANTI_FREEYUN_INIT_INFO(std::string Version, std::string SecretKey, std::string Rc4Key, std::string SaltKey, std::string AppId, std::string MachineID,int ServerLine)
+	ANTI_FREEYUN_INIT_INFO(std::string Version, std::string SecretKey, std::string Rc4Key, std::string SaltKey, std::string AppId, std::string MachineID,int ServerLine, TAG_ANTI_FREEYUN_PROXY Proxy)
 	{	
 		this->AppId      = AppId;
 		this->Version    = Version;
@@ -24,9 +37,10 @@ typedef struct ANTI_FREEYUN_INIT_INFO
 		this->Rc4Key     = Rc4Key;
 		this->MachineID  = MachineID;
 		this->SaltKey    = SaltKey;
-		
 		this->ServerLine = ServerLine;
+		this->Proxy      = Proxy;
 	}
+
 }TAG_ANTI_FREEYUN_INIT_INFO, * PTAG_ANTI_FREEYUN_INIT_INFO;
 
 //注册用户

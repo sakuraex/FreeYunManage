@@ -23,10 +23,17 @@ public:
 	//@返回Http头部信息
 	std::string GetHttpHeader();
 
-
+	/*
+	*	@设置代理
+	*/
+	void SetProxy(std::string ip, std::string Port, std::string user, std::string password);
 
 private:
 	static size_t OnWriteData(void* buffer, size_t size, size_t nmemb, void* lpVoid);
 	std::string m_Header;
+	//* 代理的IP端口和用户账号密码
+	std::string m_IpPort; 
+	std::string m_User;
+
 };
 

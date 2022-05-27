@@ -9,10 +9,13 @@
 #include<bitset>
 int main()
 {
-    HttpClient client;
+  //  HttpClient client;
 
-  std::string r;
-  auto Code =  client.Get("http://www.freeyun.net/auther/index.html",r);
+	 //std::string r;
+	 //std::string b;
+
+	 //client.SetProxy("127.0.0.1", "10809", "123", "321");
+	 //auto Code =  client.Get("http://ip.json-json.com/",r);
 
 
 
@@ -26,8 +29,12 @@ int main()
 
    //ACEWarningLog("{0}", client.GetHttpHeader().c_str());
     FreeYun yun;
+	TAG_ANTI_FREEYUN_PROXY Proxy;
+	Proxy.IP   = "127.0.0.1";
+	Proxy.Port = "10809";
 
-    auto info = yun.CloudInit(&TAG_ANTI_FREEYUN_INIT_INFO("1168", "27A5172AFA54D2F4A202EA76B4B43612", "COxlsBLt", "KzEWarV4N8", "9303", "122", 0));
+
+    auto info = yun.CloudInit(&TAG_ANTI_FREEYUN_INIT_INFO("1168", "27A5172AFA54D2F4A202EA76B4B43612", "COxlsBLt", "KzEWarV4N8", "9303", "122", 0, Proxy));
 
     if (std::get<0>(info))
     {
@@ -35,7 +42,7 @@ int main()
 
 
 
-		info = yun.CloudLogin("121231", "33", "md5");
+		info = yun.CloudLogin("1233cnm", "wsnd", "md5");
 
         if (std::get<0>(info))
         {
