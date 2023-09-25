@@ -1,5 +1,4 @@
 #pragma once
-#include <ACEBase.h>
 #include <string>
 #include "HttpClient.h"
 #include <nlohmann/json.hpp>
@@ -241,6 +240,22 @@ private:
 	std::string GetPostPack(std::string data,std::string wtype, std::string csTime);
 	// @ 检查返回的json信息
 	std::tuple<bool, std::string, nlohmann::json> DetectInfo(std::string data, std::tuple<bool, std::string, nlohmann::json> & Info,int Code);
+
+	// @ 取毫秒时间戳
+	__int64 GetTimeStamp();
+
+	// @ 取秒时间戳
+	ULONG	GetUnixTimeStamp();
+
+	// @ 时间戳转string
+	std::string GetTimeStampStr();
+
+	// @ 把字节转为十六进制
+	std::string ByteToHex(PBYTE vByte, int vLen);
+
+	// @ 十六进制字符串转字节 大小 / 2
+	PBYTE HexToByte(std::string Hex, PBYTE SrcBuffer);
+
 private:
 	// 可考虑加密这些字符串.但是会带来解密开销
 	std::string m_Version;

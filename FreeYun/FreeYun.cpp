@@ -1,8 +1,9 @@
 ﻿#include "FreeYun.h"
 #include <ctime>
-#include <ACEConnect.h>
+#include "VMProtectSDK.h"
 #include "openssl/rc4.h"
 #include "openssl/md5.h"
+#include "xorstr.hpp"
 
 
 FreeYun::FreeYun()
@@ -38,9 +39,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudInit(PTAG_ANTI_FREEY
 
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false,"","");
 
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData=
@@ -61,9 +62,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudReg(PTAG_ANTI_FREEYU
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -90,9 +91,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudLogin(std::string Ac
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -122,9 +123,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudPay(std::string Acco
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -147,9 +148,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudQueryUserInfo(std::s
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -172,9 +173,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudBlackLst(std::string
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -197,9 +198,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudChangePassword(std::
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime =GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -223,9 +224,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudExit(std::string Acc
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime =GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -248,9 +249,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudGetVersionInfo()
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -274,9 +275,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudGetUserStatus(std::s
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -300,9 +301,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudUserSubPoint(std::st
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -325,9 +326,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudGetPayCardList()
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -347,9 +348,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudCardLogin(std::strin
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -380,9 +381,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudExecTelnetCode(std::
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -409,9 +410,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudGetTeletVar(std::str
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -436,9 +437,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudHeartBeat(std::strin
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -460,9 +461,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudChangeMachine(std::s
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -486,9 +487,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudFeedback(std::string
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime =GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -511,9 +512,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudUpLoadClientExceptio
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -537,9 +538,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudGetUserPermission(st
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -562,9 +563,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudRemoteAlgRelay(std::
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -588,9 +589,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudUsersOnlineCount()
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -612,9 +613,9 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::CloudUserUnBind(std::stri
 {
 	VMProtectBegin(__FUNCTION__);
 	std::tuple<bool, std::string, nlohmann::json>  result = std::make_tuple(false, "", "");
-	auto util = std::make_unique<CACEUtil>();
+	
 	// 获取时间戳
-	auto csTime = util->GetTimeStampStr();
+	auto csTime = GetTimeStampStr();
 
 	// 要发送的数据
 	FreeYun_json SendJsonData =
@@ -726,7 +727,7 @@ std::string FreeYun::SetErrorCode(int ErCode)
 
 std::string FreeYun::RC4Encrypt(std::string plaintext)
 {
-	auto util = std::make_unique<CACEUtil>();
+	
 
 	std::vector<BYTE>Ciphertext(plaintext.length());
 
@@ -736,19 +737,17 @@ std::string FreeYun::RC4Encrypt(std::string plaintext)
 
 	RC4(&s_table, plaintext.length(), (unsigned char*)plaintext.c_str(), Ciphertext.data());     //加密
 
-	auto Rc4data = util->ByteToHex(Ciphertext.data(), Ciphertext.size());
+	auto Rc4data = ByteToHex(Ciphertext.data(), Ciphertext.size());
 
 	return Rc4data;
 }
 
 std::string FreeYun::RC4Decode(std::string Ciphertext)
 {
-	//先把密文转为字节
-	auto util = std::make_unique<CACEUtil>();
-
+	
 	std::vector<BYTE>CipherByte(Ciphertext.length());
 
-	util->HexToByte(Ciphertext.data(), CipherByte.data());
+	HexToByte(Ciphertext.data(), CipherByte.data());
 
 	RC4_KEY s_table;
 	RC4_set_key(&s_table, m_Rc4Key.length(), (unsigned char*)m_Rc4Key.c_str());					//初始化
@@ -763,7 +762,7 @@ std::string FreeYun::RC4Decode(std::string Ciphertext)
 
 std::string FreeYun::GetStrMd5(std::string str)
 {
-	auto util = std::make_unique<CACEUtil>();
+	
 	unsigned char MD5result[16];
 
 	MD5_CTX md5_ctx;
@@ -771,7 +770,7 @@ std::string FreeYun::GetStrMd5(std::string str)
 	MD5_Update(&md5_ctx, str.c_str(), str.length());   
 	MD5_Final(MD5result, &md5_ctx);  //获取MD5
 
-	auto StrMd5 = util->ByteToHex(MD5result,16);
+	auto StrMd5 = ByteToHex(MD5result,16);
 
 	return StrMd5;
 }
@@ -818,11 +817,21 @@ std::string FreeYun::GetPostPack(std::string data, std::string wtype, std::strin
 	//@ 签名盐
 	//@ appid
 	//@ RC4加密的data
-	std::string csSendDataToMd5 = fmt::format(xorstr_("{0}{1}{2}{3}{4}"), wtype, csTime, m_SaltKey, m_AppId, RC4SendData);
-	//@ 发送的字符串
-	std::string SendStr = fmt::format(xorstr_("version={}&appid={}&wtype={}&timestamp={}&data={}&sign={}"), m_Version, m_AppId, wtype, csTime, RC4SendData, GetStrMd5(csSendDataToMd5));
 
-	return  this->Post(SendStr);
+	char szText[4096] = { 0 };
+
+	sprintf(szText, xorstr_("%s%s%s%s%s"), wtype.data(), csTime.data(), m_SaltKey.data(), m_AppId.data(), RC4SendData.data());
+
+	//std::string csSendDataToMd5 = fmt::format(xorstr_("{0}{1}{2}{3}{4}"), wtype, csTime, m_SaltKey, m_AppId, RC4SendData);
+	
+	char szSendText[4096] = { 0 };
+
+	sprintf(szSendText, xorstr_("version=%s&appid=%s&wtype=%s&timestamp=%s&data=%s&sign=%s"), m_Version.data(), m_AppId.data(), wtype.data(), csTime.data(),  RC4SendData.data(), GetStrMd5(szText).data());
+
+	//@ 发送的字符串
+	//std::string SendStr = fmt::format(xorstr_("version={}&appid={}&wtype={}&timestamp={}&data={}&sign={}"), m_Version, m_AppId, wtype, csTime, RC4SendData, GetStrMd5(szText));
+
+	return  this->Post(szSendText);
 }
 
 std::tuple<bool, std::string, nlohmann::json> FreeYun::DetectInfo(std::string data, std::tuple<bool, std::string, nlohmann::json>& Info, int nCode)
@@ -839,8 +848,8 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::DetectInfo(std::string da
 
 		if (Status != 0)
 		{
-			std::get<1>(Info) = fmt::format(SetErrorCode(-9001), j[xorstr_("msg")].get<std::string>(), Status);
-
+			//std::get<1>(Info) = fmt::format(SetErrorCode(-9001), j[xorstr_("msg")].get<std::string>(), Status);  Htpp:Status Error
+			std::get<1>(Info) = SetErrorCode(-9001);
 			return Info;
 		}
 		auto data = nlohmann::json::parse(RC4Decode(j[xorstr_("data")].get<std::string>()));
@@ -869,3 +878,100 @@ std::tuple<bool, std::string, nlohmann::json> FreeYun::DetectInfo(std::string da
 	return Info;
 }
 
+__int64 FreeYun::GetTimeStamp()
+{
+	SYSTEMTIME tmSys;
+
+	GetLocalTime(&tmSys);
+
+	time_t curtime;
+
+	time(&curtime);
+
+	__int64 tmDst = __int64(curtime) * 1000 + tmSys.wMilliseconds;
+
+	//_i64toa(tmDst, (char*)data.c_str(), 10);
+	return tmDst;
+}
+
+ULONG FreeYun::GetUnixTimeStamp()
+{
+	time_t curtime;
+
+	time(&curtime);
+
+	return curtime;
+}
+
+std::string FreeYun::GetTimeStampStr()
+{
+	return std::to_string(GetTimeStamp());
+}
+
+std::string FreeYun::ByteToHex(PBYTE vByte, int vLen)
+{
+	std::vector<BYTE> Buffer(vLen * 2 + 1);
+	int tmp2;
+	for (int i = 0; i < vLen; i++)
+	{
+		tmp2 = (int)(vByte[i]) / 16;
+		Buffer[i * 2] = (char)(tmp2 + ((tmp2 > 9) ? 'A' - 10 : '0'));
+		tmp2 = (int)(vByte[i]) % 16;
+		Buffer[i * 2 + 1] = (char)(tmp2 + ((tmp2 > 9) ? 'A' - 10 : '0'));
+	}
+	Buffer[vLen * 2] = '\0';
+
+	return std::string((char*)Buffer.data());
+}
+
+PBYTE FreeYun::HexToByte(std::string Hex, PBYTE SrcBuffer)
+{
+
+	int iLen = Hex.length();
+
+	if (iLen <= 0 || 0 != iLen % 2)
+		return nullptr;
+
+	unsigned char* pbBuf = SrcBuffer;  // 数据缓冲区
+
+	int tmp1, tmp2;
+	for (int i = 0; i < iLen / 2; i++)
+	{
+		if ((Hex[i * 2] >= 'A') && (Hex[i * 2] <= 'F'))
+		{
+			tmp1 = (int)Hex[i * 2] - (((int)Hex[i * 2] >= 'A') ? 'A' - 10 : '0');
+		}
+		else if ((Hex[i * 2] >= 'a') && (Hex[i * 2] <= 'f'))
+		{
+			tmp1 = (int)Hex[i * 2] - (((int)Hex[i * 2] >= 'a') ? 'a' - 10 : '0');
+		}
+		else
+		{
+			tmp1 = (int)Hex[i * 2] - '0';
+		}
+
+		if (tmp1 >= 16)
+			return nullptr;
+
+		if ((Hex[i * 2 + 1] >= 'A') && (Hex[i * 2 + 1] <= 'F'))
+		{
+
+			tmp2 = (int)Hex[i * 2 + 1] - (((int)Hex[i * 2 + 1] >= 'A') ? 'A' - 10 : '0');
+		}
+		else if ((Hex[i * 2 + 1] >= 'a') && (Hex[i * 2 + 1] <= 'f'))
+		{
+			tmp2 = (int)Hex[i * 2 + 1] - (((int)Hex[i * 2 + 1] >= 'a') ? 'a' - 10 : '0');
+		}
+		else
+		{
+			tmp2 = (int)Hex[i * 2 + 1] - '0';
+		}
+
+		if (tmp2 >= 16)
+			return nullptr;
+
+		pbBuf[i] = (tmp1 * 16 + tmp2);
+	}
+
+	return pbBuf;
+}
